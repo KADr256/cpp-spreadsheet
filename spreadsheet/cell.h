@@ -47,10 +47,15 @@ public:
 	std::string GetText() const override;
 
 	void ClearValue();
+	void ClearValueNext(std::unordered_set<Position>* tested);
 
 	std::vector<Position> GetReferencedCells() const override;
-	bool SearchCyclic(Position pos);
-	bool SearchCyclicNext(Position pos, std::unordered_set<Position>* tested);
+	void SearchCyclicAndAddDependent();
+	void SearchCyclicNext(const Position pos, std::unordered_set<Position>* tested);
+	//void AddDependentInDependence();
+	//void DeleteDependentInDependence();
+	void ClearSearchCyclic(const std::unordered_set<Position>* add);
+
 	SheetInterface* sheet;
 	Position pos {-1,-1};
 private:
@@ -58,6 +63,18 @@ private:
 	std::vector<Position> dependence;
 	std::vector<Position> dependent;
 };
+
+/*
+template<>
+struct std::hash<Position>
+{
+	size_t
+		operator()(const Position& obj) const
+	{
+		return hash<int>()(obj.col * 20000 + obj.row);
+	}
+};
+*/
 
 template<>
 struct std::hash<Position>
