@@ -3,11 +3,9 @@
 #include "common.h"
 #include "formula.h"
 #include "unordered_set"
-//#include "sheet.h"
 
 class Cell : public CellInterface {
 public:
-	//Cell();
 	~Cell();
 
 	class Impl {
@@ -52,8 +50,6 @@ public:
 	std::vector<Position> GetReferencedCells() const override;
 	void SearchCyclicAndAddDependent();
 	void SearchCyclicNext(const Position pos, std::unordered_set<Position>* tested);
-	//void AddDependentInDependence();
-	//void DeleteDependentInDependence();
 	void ClearSearchCyclic(const std::unordered_set<Position>* add);
 
 	SheetInterface* sheet;
@@ -63,18 +59,6 @@ private:
 	std::vector<Position> dependence;
 	std::vector<Position> dependent;
 };
-
-/*
-template<>
-struct std::hash<Position>
-{
-	size_t
-		operator()(const Position& obj) const
-	{
-		return hash<int>()(obj.col * 20000 + obj.row);
-	}
-};
-*/
 
 template<>
 struct std::hash<Position>

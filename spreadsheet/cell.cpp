@@ -8,12 +8,6 @@
 #include <algorithm>
 
 
-// Реализуйте следующие методы
-/*
-Cell::Cell()
-{}
-*/
-
 Cell::~Cell()
 {
 	sheet = nullptr;
@@ -59,7 +53,6 @@ void Cell::Set(std::string text, SheetInterface* sheet_in, Position pos_in)
 				Cell* buf1 = dynamic_cast<Cell*>(sheet->GetCell(el));
 				auto buf2 = std::find(buf1->dependent.begin(), buf1->dependent.end(), pos);
 
-				//std::swap(buf2, buf1->dependent.end() - 1);
 				auto buf3 = *buf2;
 				*buf2 = *(buf1->dependent.end() - 1);
 				*(buf1->dependent.end() - 1) = buf3;
@@ -209,11 +202,6 @@ void Cell::SearchCyclicAndAddDependent()
 			if (el == pos) {
 				throw std::invalid_argument("");
 			}
-			/*
-			if (tested->count(el)) {
-				continue;
-			}
-			*/
 			tested->insert(el);
 			auto buf1 = sheet->GetCell(el);
 			if (buf1 != nullptr) {
@@ -237,7 +225,6 @@ void Cell::SearchCyclicAndAddDependent()
 	}
 	delete tested;
 	delete add;
-	//std::unordered_set<Position>* tested = new std::unordered_set<Position>;
 }
 
 void Cell::SearchCyclicNext(const Position pos_in, std::unordered_set<Position>* tested)

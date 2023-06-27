@@ -69,15 +69,6 @@ void Sheet::SetCell(Position pos, std::string text) {
 	if (list_[pos.row][pos.col]) {
 		if (text != list_[pos.row][pos.col].get()->GetText()) {
 			list_[pos.row][pos.col].get()->Set(text, this, pos);
-			/*
-			try {
-				auto old = std::move(list_[pos.row][pos.col].get());
-				list_[pos.row][pos.col].get()->Set(text, this, pos);
-			}
-			catch (...) {
-
-			}
-			*/
 		}
 	}
 	else {
@@ -92,8 +83,6 @@ void Sheet::SetCell(Position pos, std::string text) {
 		++row_cell_counter[pos.row];
 		++col_cell_counter[pos.col];
 	}
-	//ClearCell(pos);
-	//change = true;
 }
 
 const CellInterface* Sheet::GetCell(Position pos) const {

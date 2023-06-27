@@ -20,17 +20,12 @@ public:
 
 	void PrintValues(std::ostream& output) const override;
 	void PrintTexts(std::ostream& output) const override;
-	// Можете дополнить ваш класс нужными полями и методами
 
 
 private:
 	bool TestPositionInList(Position pos) const;
 
-	std::vector<std::vector<std::unique_ptr<Cell>>> list_;//Думаю map был бы лучше 
-	//,но как потом работать с дополнением строк и столбцов в "возможной" модификации
+	std::vector<std::vector<std::unique_ptr<Cell>>> list_;
 	std::vector<size_t> row_cell_counter;
 	std::vector<size_t> col_cell_counter;
-	//bool change = false;
-	//size_t row_zone = 0;
-	//size_t col_zone = 0;
 };
